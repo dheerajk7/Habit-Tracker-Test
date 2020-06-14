@@ -13,6 +13,9 @@ app.use('/',require('./routes/index.js'));
 //using static files
 app.use(express.static('./assets'));
 
+//connecting to database
+const db = require('./config/mongoose');
+
 app.listen(port,function(err)
 {
     if(err)
