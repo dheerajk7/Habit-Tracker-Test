@@ -1,21 +1,28 @@
 let lastSevenDates = [];
 let currDate = new Date();
+//getting last seven dates including curernt dates
 for(var i=6;i>=0;i--)
 {
     lastSevenDates.push(new Date(currDate.getTime() - (i * 24 * 60 * 60 * 1000)));
 }
+
+//getting all the habit for week page
 let habitsItem = document.querySelectorAll('.week-item-container');
 let habitId = [];
+
+//getting all the id's of habit from week view page
 for(item of habitsItem)
 {
     habitId.push(item.id.slice(6));
 }
 
+//iterating over all the habit id's and getting the status of all the seven date and updating it
 for(id of habitId)
 {
     for(date of lastSevenDates)
     {
         let result = [];
+        //getting status of particular date
         $.ajax(
             {
                 type:'get',
@@ -41,6 +48,7 @@ for(id of habitId)
                     </div>`
                     );
                     $(`#day-${data.data.habit_id}`).append(itemDom);
+                    //adding listener to update the status
                     $(`#done-${new Date(data.data.date).getDate()}-${data.data.habit_id}`).click(function()
                     {
                         let date = $(this).attr('data-date');
@@ -68,6 +76,8 @@ for(id of habitId)
                         let statusId = `status-${newDate}-${id}`;
                         $(`#${statusId}`).html('');
                     });
+
+                    //for showing the list and hidding again of button to update status
                     $(`#${new Date(data.data.date).getDate()}-${data.data.habit_id}`).click(function()
                     {
                         let id = `#list-${this.id}`
@@ -88,6 +98,7 @@ for(id of habitId)
     }    
 }
 
+//function to changes status for the particular habit Id and date in status table
 function changeStatusCall(id,status,date)
 {
     $.ajax(
@@ -103,7 +114,7 @@ function changeStatusCall(id,status,date)
     );
 }
 
-
+//getting icons for status and updating them in view
 function getStatusHTML(status)
 {
     let rightHtml = '<i class="fa fa-check" aria-hidden="true"></i>';

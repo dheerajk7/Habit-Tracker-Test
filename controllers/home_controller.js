@@ -22,6 +22,7 @@ module.exports.home = async function(request,response)
     
 }
 
+//rendering add habit view
 module.exports.addHabit = function(request,response)
 {
     return response.render('add-habit',
@@ -30,6 +31,7 @@ module.exports.addHabit = function(request,response)
     });
 }
 
+//saving a habit
 module.exports.saveHabit = async function(request,response)
 {
     try
@@ -55,6 +57,7 @@ module.exports.saveHabit = async function(request,response)
     
 }
 
+//to change the status if already present otherwise create status for the particular date and day
 module.exports.changeStatus = async function(request,response)
 {
     try
@@ -68,6 +71,7 @@ module.exports.changeStatus = async function(request,response)
         let statusToken = await HabitStatus.findOne({habit:request.query.id,date_created:dateToFind});
         if(statusToken)
         {
+            //updating status if status is already there
             await statusToken.updateOne({habit_status:status});
             statusToken.save();
         }
@@ -76,6 +80,7 @@ module.exports.changeStatus = async function(request,response)
             let habit = await Habit.findById(request.query.id);
             if(habit)
             {
+                //creating status if status is not there
                 await HabitStatus.create({
                     habit:habit.id,
                     habit_status:status,
@@ -100,6 +105,7 @@ module.exports.changeStatus = async function(request,response)
     }
 }
 
+//sending habit to week views 
 module.exports.weekView = async function(request,response)
 {
     let habits = await Habit.find({});
@@ -110,6 +116,7 @@ module.exports.weekView = async function(request,response)
     );
 }
 
+//getting stautus of particular date
 module.exports.dayStatus = async function(request,response)
 {
     queryDate = new Date(request.query.date);
@@ -147,6 +154,8 @@ module.exports.dayStatus = async function(request,response)
     }
 }
 
+
+//to delete selected the habit
 module.exports.delete = async function(request,response)
 {
     try

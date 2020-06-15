@@ -5,6 +5,7 @@ var nullButtons = document.querySelectorAll('.null-status');
 //function to change staus and create status if not present 
 function changeStatusCall(id,status)
 {
+    //current date to get status of current date
     let date = new Date().toLocaleDateString();
     $.ajax(
         {
@@ -50,6 +51,7 @@ for(button of notDoneButtons)
     );
 }
 
+//adding event listener to update button
 for(button of nullButtons)
 {
     button.addEventListener('click',function()
