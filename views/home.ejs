@@ -1,2 +1,26 @@
 <link rel="stylesheet" href="css/home.css">
-<h1>home</h1>
+<div class="container col-md-8 col-sm-10 col-sm-offset-1 col-xs-12 col-md-offset-2">
+    <ul class="habit-list">
+        <% for(habit of habits) { %> 
+        <li id="item-<%= habit._id %>" class="habit-item">
+            <div class="checkbox-container">
+                <input class="checbox" type="checkbox" id="<%= habit._id %>">
+            </div>
+            <div class="desc-container">
+                <div class="title-container">
+                    <div><%= habit.title %></div>
+                </div>
+                <div class="time-container">
+                    <div><%= habit.time %></div>
+                </div>
+            </div>
+            <div class="button-container">
+                <div class="button"><button id="done-<%=habit._id %>" class="done"><i class="fa fa-check" aria-hidden="true"></i></button></div>
+                <div class="button"><button id="not-done-<%=habit._id %>" class="not-done"><i class="fa fa-times" aria-hidden="true"></i></button></div>
+                <div class="button"><button id="null-<%=habit._id %>" class="null-status"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
+            </div>
+        </li>    
+        <% } %>
+    </ul>
+</div>
+<script src="/js/home.js"></script>
