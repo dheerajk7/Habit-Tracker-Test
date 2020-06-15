@@ -11,6 +11,15 @@ function changeStatusCall(id,status)
             type:'get',
             url:'changeStatus',
             data:{id:id,status:status,date:date},
+            success:function(data)
+            {
+                let element = $('#status-update');
+                element.css('display','block');
+                setTimeout(function()
+                {
+                    element.css('display','none');
+                },1000);
+            },
             error:function(err)
             {
                 console.log(`Error in ajax Call ${status}`);

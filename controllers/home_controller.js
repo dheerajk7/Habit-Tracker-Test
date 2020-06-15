@@ -151,7 +151,6 @@ module.exports.delete = async function(request,response)
 {
     try
     {
-        console.log(request.query.info);
         for(item of request.query.info)
         {
             await Habit.findByIdAndDelete(item);

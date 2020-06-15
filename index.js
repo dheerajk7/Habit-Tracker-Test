@@ -13,6 +13,7 @@ app.use(sassMiddleware({
     prefix:'/css',
 }));
 
+
 app.use(express.urlencoded());
 
 //setting up view engine to ejs
@@ -24,6 +25,7 @@ app.use(expressLayouts);
 //extracting styles and sheets at top in head tag
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
+
 
 //using router
 app.use('/',require('./routes/index.js'));
